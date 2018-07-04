@@ -1,7 +1,13 @@
 package com.sgy.dao.daoInterface;
 
-import com.sgy.dao.DomainRepository;
+
 import com.sgy.entity.Task;
 
-public interface TaskDao extends DomainRepository<Task,Integer> {
+import java.util.List;
+
+public interface TaskDao{
+
+    public String addTask(Task task);
+
+    public List<Task> listTask();
 }

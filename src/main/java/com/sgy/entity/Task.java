@@ -2,11 +2,12 @@ package com.sgy.entity;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
 @Table(name = "Task")
-public class Task {
+public class Task{
 
     @Id
     @GeneratedValue

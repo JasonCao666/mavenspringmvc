@@ -6,6 +6,8 @@ import com.sgy.service.serviceInterFace.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TaskServiceImp implements TaskService {
 
@@ -14,7 +16,12 @@ public class TaskServiceImp implements TaskService {
 
 
     @Override
-    public Integer addTask(Task task) {
-        return taskDao.save(task);
+    public String addTask(Task task) {
+        return taskDao.addTask(task);
+    }
+
+    @Override
+    public List<Task> listTask() {
+        return taskDao.listTask();
     }
 }
