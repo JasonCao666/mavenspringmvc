@@ -9,6 +9,8 @@ public interface TaskService {
     public String addTask(Task task);
 
     public List<Task> listTask();
+
+    public boolean editTask(String id, Task task);
 }
 
 

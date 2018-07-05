@@ -68,6 +68,35 @@ public class TaskController {
 
     }
 
+    @RequestMapping(value = "editTask", method = RequestMethod.POST)
+    @ResponseBody
+    public void editTask(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        String result = "{\"result\":\"error\"}";
+        Task task=new Task();
+
+        response.setCharacterEncoding("UTF-8");
+        String taskId=request.getParameter("taskId");
+        String taskName = request.getParameter("taskName");
+        String taskDescription = request.getParameter("taskDescription");
+
+        task.setName(taskName);
+        task.setDescription(taskDescription);
+
+        System.out.println("Id: "+taskId+"Name: "+taskName+"Des: "+taskDescription);
+
+        if(taskService.editTask(taskId,task))
+        {
+            result = "{\"result\":\"success\"}";
+        }
+        response.setContentType("application/json");
+
+
+        PrintWriter out = response.getWriter();
+        out.write(result);
+        out.close();
+
+    }
+
 
 
 }

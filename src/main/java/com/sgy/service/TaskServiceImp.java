@@ -24,4 +24,9 @@ public class TaskServiceImp implements TaskService {
     public List<Task> listTask() {
         return taskDao.listTask();
     }
+
+    @Override
+    public boolean editTask(String id, Task task) {
+        return taskDao.editTask(id, task);
+    }
 }

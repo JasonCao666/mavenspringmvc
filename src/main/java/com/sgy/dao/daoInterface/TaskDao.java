@@ -10,4 +10,8 @@ public interface TaskDao{
     public String addTask(Task task);
 
     public List<Task> listTask();
+
+    public boolean editTask(String id, Task task);
+
+    public boolean deleteTask(String id);
 }
