@@ -30,9 +30,7 @@ public class TaskDaoImp implements TaskDao {
     public String addTask(Task task) {
         boolean result=false;
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
         session.save(task);
-        session.getTransaction().commit();
         return "{status:success}";
     }
 
@@ -65,7 +63,6 @@ public class TaskDaoImp implements TaskDao {
     @Override
     public boolean deleteTask(String id) {
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
         String hql = "delete Task t where t.id = ?";
         Query query = session.createQuery(hql);
 

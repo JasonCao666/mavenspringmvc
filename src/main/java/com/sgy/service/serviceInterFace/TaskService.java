@@ -11,6 +11,8 @@ public interface TaskService {
     public List<Task> listTask();
 
     public boolean editTask(String id, Task task);
+
+    public boolean delTask(String id);
 }
 
 

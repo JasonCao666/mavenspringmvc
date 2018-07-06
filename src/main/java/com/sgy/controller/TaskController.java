@@ -97,6 +97,27 @@ public class TaskController {
 
     }
 
+    @RequestMapping(value = "delTask", method = RequestMethod.POST)
+    @ResponseBody
+    public void delTask(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        String result = "{\"result\":\"error\"}";
+
+
+        response.setCharacterEncoding("UTF-8");
+        String taskId=request.getParameter("taskId");
+
+        if(taskService.delTask(taskId))
+        {
+            result = "{\"result\":\"success\"}";
+        }
+        response.setContentType("application/json");
+
+
+        PrintWriter out = response.getWriter();
+        out.write(result);
+        out.close();
+
+    }
 
 
 }

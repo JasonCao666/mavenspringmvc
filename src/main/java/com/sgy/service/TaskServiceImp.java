@@ -29,4 +29,9 @@ public class TaskServiceImp implements TaskService {
     public boolean editTask(String id, Task task) {
         return taskDao.editTask(id, task);
     }
+
+    @Override
+    public boolean delTask(String id) {
+        return taskDao.deleteTask(id);
+    }
 }
