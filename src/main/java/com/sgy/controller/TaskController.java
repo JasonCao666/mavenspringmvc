@@ -29,6 +29,13 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
+    @RequestMapping("showPage")
+    public String showPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        return "expert_page";
+
+    }
+
     @RequestMapping(value = "addTask", method = RequestMethod.POST)
     @ResponseBody
     public void saveTask(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -53,8 +60,7 @@ public class TaskController {
     }
 
 
-    @RequestMapping(value = "listTask", method = RequestMethod.POST)
-    @ResponseBody
+    @RequestMapping("listTask")
     public void listTask(HttpServletRequest request, HttpServletResponse response) throws Exception{
         System.out.println("controller");
         Task task=new Task();
