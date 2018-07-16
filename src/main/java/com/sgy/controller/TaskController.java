@@ -32,7 +32,7 @@ public class TaskController {
     @RequestMapping("showPage")
     public String showPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        return "expert_page";
+        return "redirect:/expert/showPage";
 
     }
 

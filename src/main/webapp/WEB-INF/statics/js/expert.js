@@ -6,7 +6,7 @@ var selected_single_task;
 $(document).ready(function(){
 
 
-    prepare();
+    //prepare();
 
 
     var createButton;
@@ -18,6 +18,7 @@ $(document).ready(function(){
 
 
     $("#addTaskButton").click(function () {
+        alert(1);
         addTaskRequest();
         prepare();
     });
@@ -25,6 +26,10 @@ $(document).ready(function(){
     $("#editTaskButton").click(function () {
         editTaskRequest();
         prepare();
+    });
+
+    $("#addProButton").click(function () {
+        addProRequest();
     });
 
 
@@ -70,6 +75,7 @@ function addTaskRequest() {
     var taskName=document.getElementById("taskName").value;
     var taskDescription=document.getElementById("taskDescription").value;
     taskDescription= taskDescription.replace(/\n|\r\n/g,"<br>");
+    alert(taskName);
     //var reg=new RegExp("<br>","g"); var newstr=remContent.replace(reg,"\n");
 
     $.ajax({
@@ -130,7 +136,7 @@ function editTaskRequest() {
 }
 
 function delTaskRequest(e){
-var id=e.name;
+    var id=e.name;
     $.ajax({
         url: "delTask",
         type: "POST",
@@ -151,3 +157,25 @@ var id=e.name;
 
 }
 
+function addProRequest() {
+    var proName=document.getElementById("proName").value;
+    var proDescription=document.getElementById("proDescription").value;
+    proDescription= proDescription.replace(/\n|\r\n/g,"<br>");
+    //var reg=new RegExp("<br>","g"); var newstr=remContent.replace(reg,"\n");
+
+    $.ajax({
+        url: "addProject",
+        type: "POST",
+        dataType: "json",
+        data: {
+            "proName": proName,
+            "proDescription": proDescription,
+        },
+        success:function(data){
+            alert("add project success");
+        },
+        error:function(){
+            alert("error");
+        }
+    });
+}

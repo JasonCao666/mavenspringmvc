@@ -1,22 +1,72 @@
 package com.sgy.controller;
 
 
+import com.sgy.entity.Project;
+import com.sgy.service.serviceInterFace.ExpertService;
+import net.sf.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 @Controller
 @RequestMapping("/expert")
 public class expertController {
     private static final Logger logger = LoggerFactory.getLogger(expertController.class);
 
-    //映射一个action
-    @RequestMapping("/index")
-    public  String index(){
-        //输出日志文件
-        logger.info("the first jsp pages");
-        //返回一个index.jsp这个视图
-        return "index";
+    @Autowired
+    private ExpertService expertService;
+
+    @RequestMapping("showPage")
+    public String showPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        return "test";
+
+    }
+
+    @RequestMapping(value = "addProject", method = RequestMethod.POST)
+    @ResponseBody
+    public void saveProject(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        Project project=new Project();
+
+        response.setCharacterEncoding("UTF-8");
+
+        String proName = request.getParameter("proName");
+        String proDescription = request.getParameter("proDescription");
+        project.setName(proName);
+        project.setDescription(proDescription);
+
+        System.out.println(proName+" : "+proDescription);
+
+        String jsonStr = expertService.addProject(project);
+        JSONObject jsonObj = new JSONObject(jsonStr);
+        PrintWriter out = response.getWriter();
+        out.print(jsonObj);
+        out.close();
+
+    }
+
+    @RequestMapping("listExpert")
+    public void listTask(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        System.out.println("controller");
+        Project pro=new Project();
+        List<Project> list_project = expertService.listProject();
+        System.out.println(list_project);
+        String jsonArray= JSONArray.fromObject(list_project).toString();
+        System.out.println(jsonArray);
+        PrintWriter out = response.getWriter();
+        out.print(jsonArray);
+        out.close();
+
     }
 }

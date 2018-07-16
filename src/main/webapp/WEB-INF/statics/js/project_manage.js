@@ -36,6 +36,8 @@ $(document).ready(function(){
 
 });
 
+
+
 function prepare(){
 
     $.ajax({
@@ -63,28 +65,25 @@ function prepare(){
             }
         }
     });
-
-
-
 }
 
 
 
 
-function addTaskRequest() {
-    var taskName=document.getElementById("taskName").value;
-    var taskDescription=document.getElementById("taskDescription").value;
-    taskDescription= taskDescription.replace(/\n|\r\n/g,"<br>");
-    alert(taskName);
+function addProRequest() {
+    var proName=document.getElementById("proName").value;
+    var proDescription=document.getElementById("proDescription").value;
+    proDescription= proDescription.replace(/\n|\r\n/g,"<br>");
+    alert(proName);
     //var reg=new RegExp("<br>","g"); var newstr=remContent.replace(reg,"\n");
 
     $.ajax({
-        url: "task/addTask",
+        url: "expert/addProject",
         type: "POST",
         dataType: "json",
         data: {
-            "taskName": taskName,
-            "taskDescription": taskDescription,
+            "proName": proName,
+            "proDescription": proDescription,
         },
         success:function(data){
             alert("add task success");

@@ -1,0 +1,86 @@
+@font-face {
+    font-family: "AppIcons";
+    src: url('/fonts/AppIcons.woff2') format('woff2'),
+    url('/fonts/AppIcons.woff') format('woff');
+}
+
+.icon:before {
+    font-family: "AppIcons";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    /* none: only necessary if not using the private unicode range (firstGlyph option) */
+    text-decoration: none;
+    text-transform: none;
+}
+
+
+.icon-arrow-down:before {
+    content: "\E001";
+}
+
+.icon-arrow-left:before {
+    content: "\E002";
+}
+
+.icon-blank:before {
+    content: "\E003";
+}
+
+.icon-business:before {
+    content: "\E004";
+}
+
+.icon-caret:before {
+    content: "\E005";
+}
+
+.icon-chart:before {
+    content: "\E006";
+}
+
+.icon-ellipsis:before {
+    content: "\E007";
+}
+
+.icon-file:before {
+    content: "\E008";
+}
+
+.icon-flag:before {
+    content: "\E009";
+}
+
+.icon-home:before {
+    content: "\E00A";
+}
+
+.icon-link-2:before {
+    content: "\E00B";
+}
+
+.icon-link:before {
+    content: "\E00C";
+}
+
+.icon-new-link:before {
+    content: "\E00D";
+}
+
+.icon-non-commercial:before {
+    content: "\E00E";
+}
+
+.icon-non-profit:before {
+    content: "\E00F";
+}
+
+.icon-personal:before {
+    content: "\E010";
+}
+
+.icon-question:before {
+    content: "\E011";
+}
