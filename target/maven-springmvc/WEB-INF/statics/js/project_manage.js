@@ -17,20 +17,18 @@ $(document).ready(function(){
     });
 
 
-    $("#addTaskButton").click(function () {
-        alert(1);
-        addTaskRequest();
-        prepare();
+    $("#proEditButton").click(function () {
+        editTaskRequest();
+
+
     });
 
-    $("#editTaskButton").click(function () {
-        editTaskRequest();
-        prepare();
-    });
 
     $("#addProButton").click(function () {
         addProRequest();
+
     });
+
 
 
 
@@ -42,7 +40,7 @@ function prepare(){
 
     $.ajax({
         type: "POST",
-        url: "listTask",
+        url: "project/listProject",
         dataType: 'json',
         success: function(data) {
             $("#temtr").nextAll().remove();
@@ -73,21 +71,23 @@ function prepare(){
 function addProRequest() {
     var proName=document.getElementById("proName").value;
     var proDescription=document.getElementById("proDescription").value;
+    var proWebsite=document.getElementById("proWebsite").value;
     proDescription= proDescription.replace(/\n|\r\n/g,"<br>");
     alert(proName);
     //var reg=new RegExp("<br>","g"); var newstr=remContent.replace(reg,"\n");
-
     $.ajax({
-        url: "expert/addProject",
+        url: "project/addProject",
         type: "POST",
         dataType: "json",
         data: {
             "proName": proName,
             "proDescription": proDescription,
+            "proWebsite": proWebsite,
         },
         success:function(data){
             alert("add task success");
-            prepare();
+            location.reload();
+
         },
         error:function(){
             alert("error");
@@ -96,35 +96,39 @@ function addProRequest() {
 }
 
 function edit(e){
-    var edit_task_id=e.name.split(",")[0];
-    var edit_task_name=e.name.split(",")[1];
-    var edit_task_description=e.name.split(",")[2];
-    document.getElementById('edit_taskId').value=edit_task_id;
-    document.getElementById('edit_taskName').value=edit_task_name;
-    document.getElementById('edit_taskDescription').value=edit_task_description;
+    var edit_pro_id=e.name.split(",")[0];
+    var edit_pro_name=e.name.split(",")[1];
+    var edit_pro_description=e.name.split(",")[2];
+    var edit_pro_website=e.name.split(",")[3];
+    document.getElementById('proEditId').value=edit_pro_id;
+    document.getElementById('proEditName').value=edit_pro_name;
+    document.getElementById('proEditDescription').value=edit_pro_description;
+    document.getElementById('proEditWebsite').value=edit_pro_website;
 
 }
 
 function editTaskRequest() {
 
-    var edit_taskId = document.getElementById("edit_taskId").value;
-    var edit_taskName = document.getElementById("edit_taskName").value;
-    var edit_description = document.getElementById("edit_taskDescription").value;
+    var edit_proId = document.getElementById("proEditId").value;
+    var edit_proName = document.getElementById("proEditName").value;
+    var edit_proDescription = document.getElementById("proEditDescription").value;
+    var edit_proWebsite = document.getElementById("proEditWebsite").value;
+    var url="project/editProject";
+
     $.ajax({
-        url: "editTask",
+        url: url,
         type: "POST",
         dataType: "json",
         data: {
-            "taskId": edit_taskId,
-            "taskName": edit_taskName,
-            "taskDescription": edit_description,
+            "proId": edit_proId,
+            "proName": edit_proName,
+            "proDescription": edit_proDescription,
+            "proWebsite":edit_proWebsite,
         },
         success: function (data) {
             if ("success" == data.result) {
-
                 alert("edit success");
-                prepare();
-
+                location.reload();
             }
             else {
 
@@ -137,44 +141,52 @@ function editTaskRequest() {
 function delTaskRequest(e){
     var id=e.name;
     $.ajax({
-        url: "delTask",
+        url: "project/delProject",
         type: "POST",
         dataType: "json",
         data: {
-            "taskId": id,
+            "proId": id,
         },
         success: function (data) {
             if ("success" == data.result) {
-                alert("edit success");
-                prepare();
+                alert("del success");
+                location.reload();
             }
             else {
-                alert("edit fail");
+                alert("del fail");
             }
         }
     });
 
 }
 
-function addProRequest() {
-    var proName=document.getElementById("proName").value;
-    var proDescription=document.getElementById("proDescription").value;
-    proDescription= proDescription.replace(/\n|\r\n/g,"<br>");
-    //var reg=new RegExp("<br>","g"); var newstr=remContent.replace(reg,"\n");
+function showTaskPage(id){
+    //var id=e.name;
 
-    $.ajax({
-        url: "addProject",
+    /*$.ajax({
+        url: "task/showTaskPage",
         type: "POST",
         dataType: "json",
         data: {
-            "proName": proName,
-            "proDescription": proDescription,
+            "proId": id,
         },
-        success:function(data){
-            alert("add project success");
+        success: function (data) {
+            window.location.href="task/showTaskList?proId="+id;
+
+        }
+    });*/
+    $('#mainContents').empty();
+    $.ajax({
+
+        type: "GET",
+        url: "task/showTaskPage",
+        data: {
+            "proId": id,
         },
-        error:function(){
-            alert("error");
+        success: function(data) {
+            $('#mainContents').append(data);
         }
     });
+
 }
+

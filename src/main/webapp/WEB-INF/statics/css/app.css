@@ -10863,7 +10863,7 @@ input.grid-size-range::-ms-tooltip {
     display: block;
     float: left;
     position: relative;
-    margin: 0 16px 18px 0;
+    margin: 0 16px 16px 0px;
     height: 110px;
     width: 110px;
     visibility: hidden;

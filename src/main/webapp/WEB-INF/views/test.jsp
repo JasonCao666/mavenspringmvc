@@ -1,6 +1,28 @@
-<!DOCTYPE html>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page import="java.util.List"%>
+<%@page import="com.sgy.entity.Project"%>
+<%@page import="com.sgy.service.ExpertServiceImp"%>
+<%@page import="com.sgy.util.SpringContextsUtil"%>
+
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    ExpertServiceImp projectServiceImp = (ExpertServiceImp)SpringContextsUtil.getBean("expertServiceImp");
+    List<Project> projects = projectServiceImp.listProject();
+    for(int i=0;i<projects.size();i++){
+        System.out.print(projects.get(i).getName());
+        System.out.print(projects.get(i).getDescription());
+    }
+    System.out.println("Path: "+path);
+    System.out.println("basePath: "+basePath);
+    //CalendarMapper calendarMapper = (CalendarMapper)context.getBean("calendarMapper");
+    //List<Project> menus = expertServiceImp.listProject();
+%>
+<!--<!DOCTYPE html>-->
 <html lang="en">
 <head>
+    <!--<base href="<%=basePath%>">
     <meta charset="UTF-8">
     <title></title>
     <script src="/js/jquery-3.3.1.js"></script>
@@ -8,19 +30,19 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/project_manage.js"></script>
     <link href="/css/app.css" rel="stylesheet">
-    <link href="/css/app_icons.css" rel="stylesheet">
+    <link href="/css/app_icons.css" rel="stylesheet">-->
     <style id="list_icon_size_page-list">
         .page-list .grid li {
             visibility: visible;
             width: 147px;
             height: 161px;
-            margin: 0 15.4px 15.4px 0;
+            margin: 20px 15.4px 15.4px 0;
         }</style>
 </head>
 
 <body>
-<div class="container" style="display: block;">
-    <div class="navbar-form" style="margin-top: 20px;">
+<!--<div class="container" style="display: block;">-->
+    <div class="navbar-form" style="margin-top: 20px;height: 20%;">
         <a class="new-button" href="javascript:void(0);" rel="route" title="New" data-toggle="modal" data-target="#projectModal">
         <div class="horizontal-line"></div>
         <div class="vertilcal-line"></div>
@@ -45,6 +67,10 @@
                                 <label class="form-label">Project description</label>
                                 <textarea class="form-control" rows="3" name=textarea id="proDescription"></textarea>
                             </div>
+                            <div class="form-group">
+                                <label class="form-label">Website URL</label>
+                                <textarea class="form-control" rows="3" name=textarea id="proWebsite"></textarea>
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -56,42 +82,75 @@
         </div>
     </div>
 
-    <div class="page-list clearfix" style="margin-top: 20px;">
+    <div class="row">
+        <div class="modal fade" id="projectEditModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="proEditModalLabel">Add project</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form">
+                            <input type="text" class="form-control" id="proEditId" style="display:none;">
+                            <div class="form-group">
+                                <label class="form-label">Project name</label>
+                                <input type="text" class="form-control" id="proEditName">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Project description</label>
+                                <textarea class="form-control" rows="3" name=textarea id="proEditDescription"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">website URL</label>
+                                <textarea class="form-control" rows="3" name=textarea id="proEditWebsite"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="proEditButton" data-dismiss="modal">Update Project</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-list clearfix">
         <ul class="grid">
-            <li class="page-list-item grid-style-item"><a href="/s1701572-00201434/uuuuuuuu" rel="route">
+            <%
+                for(int i=0;i<projects.size();i++)
+                {
+                    Project project=projects.get(i);
+            %>
+            <li class="page-list-item grid-style-item"><a href="javascript:showTaskPage(<%=project.getId()%>)" name="<%=project.getId()%>"  rel="route">
                 <div class="hover"></div>
                 <div class="content">
                     <div class="header">
-                        <div class="title">uuuuuuuu</div>
+                        <div class="title"><%=project.getName()%></div>
                     </div>
-                    <div class="description">kdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkd
-                        kdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkd
-                        kdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkdkd
-                    </div>
+                    <div class="description"><%=project.getDescription()%></div>
+
                 </div>
-            </a></li>
-            <li class="page-list-item grid-style-item"><a href="/s1701572-00201434/hjkk" rel="route">
-                <div class="hover"></div>
-                <div class="content">
-                    <div class="header">
-                        <div class="title">hjkk</div>
-                    </div>
-                    <div class="description"></div>
-                </div>
-            </a></li>
-            <li class="page-list-item grid-style-item"><a href="/s1701572-00201434/Get_started" rel="route">
-                <div class="hover"></div>
-                <div class="content">
-                    <div class="header">
-                        <div class="title">Get started</div>
-                    </div>
-                    <div class="icon"><img src="https://gyazo.com/5f93e65a3b979ae5333aca4f32600611/thumb/400"
-                                           class="lazy-load-img"></div>
-                </div>
-            </a></li>
+                </a>
+                <button type="button" class="btn btn-default" aria-label="Left Align" onclick="edit(this)"
+                        data-toggle="modal" data-target="#projectEditModal"
+                        name="<%=project.getId()+","+project.getName()+","+project.getDescription()+","+project.getWebsiteURL()%>">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                </button>
+
+                <button type="button" class="btn btn-default" aria-label="Left Align" onclick="delTaskRequest(this)"
+                        name="<%=project.getId()%>">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
+            </li>
+            <%
+                }
+
+            %>
         </ul>
     </div>
-</div>
+<!--</div>-->
 
 </body>
 </html>

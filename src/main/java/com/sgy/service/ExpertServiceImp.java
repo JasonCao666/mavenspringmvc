@@ -15,6 +15,11 @@ public class ExpertServiceImp implements ExpertService {
     @Autowired
     private ExpertDao expertDao;
 
+    public void setExpertDao(ExpertDao expertDao)
+    {
+        this.expertDao=expertDao;
+    }
+
     @Override
     public String addProject(Project project) {
         return expertDao.addProject(project);
@@ -27,11 +32,11 @@ public class ExpertServiceImp implements ExpertService {
 
     @Override
     public boolean editProject(String id, Project project) {
-        return false;
+        return expertDao.editProject(id, project);
     }
 
     @Override
     public boolean delProject(String id) {
-        return false;
+        return expertDao.deleteProject(id);
     }
 }

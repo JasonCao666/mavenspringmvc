@@ -21,6 +21,10 @@ public class ExpertDaoImp implements ExpertDao{
 
     private Session session;
 
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     @Override
     public String addProject(Project project) {
         boolean result=false;
@@ -42,11 +46,26 @@ public class ExpertDaoImp implements ExpertDao{
 
     @Override
     public boolean editProject(String id, Project project) {
-        return false;
+
+        Session session = sessionFactory.getCurrentSession();
+
+        String hql = "update Project p set p.name=?, p.description =?, p.websiteURL=? where p.id =?";
+        Query query = session.createQuery(hql);
+        query.setString(0, project.getName());
+        query.setString(1, project.getDescription());
+        query.setString(2, project.getWebsiteURL());
+        query.setInteger(3, Integer.parseInt(id));
+
+        return (query.executeUpdate()>0);
     }
 
     @Override
     public boolean deleteProject(String id) {
-        return false;
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "delete Project p where p.id = ?";
+        Query query = session.createQuery(hql);
+
+        query.setString(0, id);
+        return (query.executeUpdate() > 0);
     }
 }

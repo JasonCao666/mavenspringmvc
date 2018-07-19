@@ -50,7 +50,18 @@
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 
+
+
+
     <tx:annotation-driven transaction-manager="transactionManager" />
+    <bean id="springContextsUtil" class="com.sgy.util.SpringContextsUtil" >
+    </bean>
+    <bean id="expertDaoImp" class="com.sgy.dao.ExpertDaoImp">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="expertServiceImp" class="com.sgy.service.ExpertServiceImp">
+        <property name="expertDao" ref="expertDaoImp"></property>
+    </bean>
 
     <!-- 配置事务，使用代理的方式
     <bean id="transactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" abstract="true">

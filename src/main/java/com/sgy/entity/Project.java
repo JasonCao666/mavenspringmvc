@@ -21,6 +21,9 @@ public class Project {
     @Column(name = "project_description")
     private String description;
 
+    @Column(name = "project_websiteURL")
+    private String websiteURL;
+
     @OneToMany                                          //指定一对多关系
     @Cascade(value={CascadeType.SAVE_UPDATE})         //设定级联关系
     @JoinColumn(name="project_id")                       //指定与本类主键所对应的外表的外键
@@ -56,5 +59,13 @@ public class Project {
 
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public String getWebsiteURL() {
+        return websiteURL;
+    }
+
+    public void setWebsiteURL(String websiteURL) {
+        this.websiteURL = websiteURL;
     }
 }

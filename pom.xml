@@ -22,7 +22,7 @@
     <hibernateVersion>4.3.5.Final</hibernateVersion>
     <jstlVersion>1.2</jstlVersion>
     <taglibVersion>1.1.2</taglibVersion>
-    <servletVersion>3.0-alpha-1</servletVersion>
+    <servletVersion>3.1.0</servletVersion>
     <jsonVersion>1.9.13</jsonVersion>
     <jacksonVersion>2.5.0</jacksonVersion>
     <mysqlVersion>5.1.34</mysqlVersion>
@@ -105,7 +105,7 @@
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
+      <artifactId>javax.servlet-api</artifactId>
       <version>${servletVersion}</version>
       <scope>provided</scope>
     </dependency>
@@ -191,6 +191,8 @@
       <artifactId>commons-httpclient</artifactId>
       <version>3.1</version>
     </dependency>
+
+
 
 
 

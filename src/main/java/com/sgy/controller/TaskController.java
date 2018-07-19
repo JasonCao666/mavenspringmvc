@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,12 +30,19 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @RequestMapping("showPage")
-    public String showPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping("/showTaskPage")
+        public String showTaskPage(HttpServletRequest request,HttpServletResponse response,Model model) throws IOException {
 
-        return "redirect:/expert/showPage";
+            String proId = request.getParameter("proId");
+
+            model.addAttribute("proId", proId);
+            System.out.println("proId"+proId);
+            return "task_list";
 
     }
+
+
+
 
     @RequestMapping(value = "addTask", method = RequestMethod.POST)
     @ResponseBody

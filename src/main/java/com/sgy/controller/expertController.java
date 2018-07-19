@@ -20,22 +20,21 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
-@RequestMapping("/expert")
+@RequestMapping("/project")
 public class expertController {
     private static final Logger logger = LoggerFactory.getLogger(expertController.class);
 
     @Autowired
     private ExpertService expertService;
 
-    @RequestMapping("showPage")
-    public String showPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping("/showPage")
+    public String showProPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         return "test";
 
     }
 
-    @RequestMapping(value = "addProject", method = RequestMethod.POST)
-    @ResponseBody
+    @RequestMapping("/addProject")
     public void saveProject(HttpServletRequest request, HttpServletResponse response) throws Exception{
         Project project=new Project();
 
@@ -43,9 +42,10 @@ public class expertController {
 
         String proName = request.getParameter("proName");
         String proDescription = request.getParameter("proDescription");
+        String proWebsite=request.getParameter("proWebsite");
         project.setName(proName);
         project.setDescription(proDescription);
-
+        project.setWebsiteURL(proWebsite);
         System.out.println(proName+" : "+proDescription);
 
         String jsonStr = expertService.addProject(project);
@@ -56,7 +56,7 @@ public class expertController {
 
     }
 
-    @RequestMapping("listExpert")
+    @RequestMapping(value ="/listProject", method = RequestMethod.POST)
     public void listTask(HttpServletRequest request, HttpServletResponse response) throws Exception{
         System.out.println("controller");
         Project pro=new Project();
@@ -66,6 +66,56 @@ public class expertController {
         System.out.println(jsonArray);
         PrintWriter out = response.getWriter();
         out.print(jsonArray);
+        out.close();
+
+    }
+
+    @RequestMapping(value = "/editProject", method = RequestMethod.POST)
+    public void editProject(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        String result = "{\"result\":\"error\"}";
+        Project project=new Project();
+
+        response.setCharacterEncoding("UTF-8");
+        String proId=request.getParameter("proId");
+        String proName = request.getParameter("proName");
+        String proDescription = request.getParameter("proDescription");
+        String proWebsite=request.getParameter("proWebsite");
+
+        project.setName(proName);
+        project.setDescription(proDescription);
+        project.setWebsiteURL(proWebsite);
+
+        System.out.println("Id: "+proId+"Name: "+proName+"Des: "+proDescription);
+
+        if(expertService.editProject(proId,project))
+        {
+            result = "{\"result\":\"success\"}";
+        }
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+        out.write(result);
+        out.close();
+
+    }
+
+
+    @RequestMapping(value = "delProject", method = RequestMethod.POST)
+    public void delTask(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        String result = "{\"result\":\"error\"}";
+
+
+        response.setCharacterEncoding("UTF-8");
+        String projectId=request.getParameter("proId");
+
+        if(expertService.delProject(projectId))
+        {
+            result = "{\"result\":\"success\"}";
+        }
+        response.setContentType("application/json");
+
+
+        PrintWriter out = response.getWriter();
+        out.write(result);
         out.close();
 
     }
