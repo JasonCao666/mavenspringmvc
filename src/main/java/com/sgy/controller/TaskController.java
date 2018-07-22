@@ -41,7 +41,13 @@ public class TaskController {
 
     }
 
+    @RequestMapping("/showAddTaskPage")
+    public String showAddTaskPage(HttpServletRequest request, HttpServletResponse response,Model model) throws IOException {
+        String proId = request.getParameter("proId");
+        model.addAttribute("proId", proId);
+        return "add_task_page";
 
+    }
 
 
     @RequestMapping(value = "addTask", method = RequestMethod.POST)

@@ -28,9 +28,10 @@
     <script src="/js/jquery-3.3.1.js"></script>
     <link rel="stylesheet" href="/css/bootstrap-3.3.7.css">
     <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/project_manage.js"></script>
+
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/app_icons.css" rel="stylesheet">-->
+    <script src="/js/project_manage.js"></script>
     <style id="list_icon_size_page-list">
         .page-list .grid li {
             visibility: visible;
@@ -88,7 +89,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="proEditModalLabel">Add project</h4>
+                        <h4 class="modal-title" id="proEditModalLabel">Edit project</h4>
                     </div>
                     <div class="modal-body">
                         <form role="form">
@@ -139,7 +140,7 @@
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 </button>
 
-                <button type="button" class="btn btn-default" aria-label="Left Align" onclick="delTaskRequest(this)"
+                <button type="button" class="btn btn-default" aria-label="Left Align" onclick="delProRequest(this)"
                         name="<%=project.getId()%>">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                 </button>

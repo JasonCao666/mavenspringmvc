@@ -36,7 +36,7 @@ $(document).ready(function(){
 
 
 
-function prepare(){
+/*function prepare(){
 
     $.ajax({
         type: "POST",
@@ -63,7 +63,7 @@ function prepare(){
             }
         }
     });
-}
+}*/
 
 
 
@@ -138,7 +138,7 @@ function editTaskRequest() {
     });
 }
 
-function delTaskRequest(e){
+function delProRequest(e){
     var id=e.name;
     $.ajax({
         url: "project/delProject",
@@ -161,32 +161,19 @@ function delTaskRequest(e){
 }
 
 function showTaskPage(id){
-    //var id=e.name;
-
-    /*$.ajax({
-        url: "task/showTaskPage",
-        type: "POST",
-        dataType: "json",
-        data: {
-            "proId": id,
-        },
-        success: function (data) {
-            window.location.href="task/showTaskList?proId="+id;
-
-        }
-    });*/
-    $('#mainContents').empty();
+    alert(1);
+    window.location.href = "task/showTaskPage?proId="+id;
+    /*$('#mainContents').empty();
     $.ajax({
-
         type: "GET",
         url: "task/showTaskPage",
         data: {
             "proId": id,
         },
         success: function(data) {
-            $('#mainContents').append(data);
-        }
-    });
 
+            //$('#mainContents').append(data);
+        }
+    });*/
 }
 
