@@ -34,6 +34,13 @@ public class expertController {
 
     }
 
+    @RequestMapping("/showHeader")
+    public String showHeaderPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        return "header";
+
+    }
+
     @RequestMapping("/addProject")
     public void saveProject(HttpServletRequest request, HttpServletResponse response) throws Exception{
         Project project=new Project();

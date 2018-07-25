@@ -43,13 +43,13 @@
 
 <body>
 <!--<div class="container" style="display: block;">-->
-    <div class="navbar-form" style="margin-top: 20px;height: 20%;">
-        <a class="new-button" href="javascript:void(0);" rel="route" title="New" data-toggle="modal" data-target="#projectModal">
+
+    <div class="row">
+    <a class="new-button" href="javascript:void(0);" rel="route" title="New" data-toggle="modal" data-target="#projectModal">
         <div class="horizontal-line"></div>
         <div class="vertilcal-line"></div>
-        </a>
+    </a>
     </div>
-
     <div class="row">
         <div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">

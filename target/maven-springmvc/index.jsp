@@ -18,6 +18,7 @@
 
 </head>
 <body>
+<div class="header-nav"></div>
 <div class="container" style="display: block;" id="mainContents">
     <input type="text" class="form-control" id="currentPage" style="display:none;">
     <h4>主页面</h4>
@@ -25,12 +26,14 @@
 </div>
 <script>
     $(document).ready(function(){
-
+        $(".header-nav").load("/project/showHeader");
         prepare();
 
 
     });
     function prepare(){
+
+
         $('#mainContents').empty();
         $.ajax({
 

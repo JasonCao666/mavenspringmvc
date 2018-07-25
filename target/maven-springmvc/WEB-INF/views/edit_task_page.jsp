@@ -11,8 +11,11 @@
     <script src="/js/jquery-3.3.1.js"></script>
     <link rel="stylesheet" href="/css/bootstrap-3.3.7.css">
     <script src="/js/bootstrap.min.js"></script>
+    <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/app_icons.css" rel="stylesheet">
 </head>
 <body>
+<div class="header-nav"></div>
 <div>${taskId}</div>
 <div class="container">
     <form role="form">
@@ -49,6 +52,9 @@
     <button type="button" class="btn btn-primary" id="addTaskButton" data-dismiss="modal" onclick="editTask()">Update Task</button>
 </div>
 <script>
+    $(document).ready(function(){
+        $(".header-nav").load("/project/showHeader");
+    });
     var mysteps = new Array();
 
     var steps="${taskEfficientSteps}";

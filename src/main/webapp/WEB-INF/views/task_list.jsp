@@ -90,6 +90,7 @@
     </style>
 </head>
 <body class="task_list_body">
+<div class="header-nav"></div>
 <ul>
     <a class="new-button" href="task/showAddTaskPage?proId=${proId}" rel="route" title="New">
         <div class="horizontal-line"></div>
@@ -192,7 +193,9 @@
 -->
 </body>
 <script>
-
+    $(document).ready(function(){
+        $(".header-nav").load("/project/showHeader");
+    });
     function editTask(e)
     {
         var args=e.name;
