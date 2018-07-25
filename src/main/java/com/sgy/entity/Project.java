@@ -1,7 +1,7 @@
 package com.sgy.entity;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+
+
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -24,10 +24,8 @@ public class Project {
     @Column(name = "project_websiteURL")
     private String websiteURL;
 
-    @OneToMany                                          //指定一对多关系
-    @Cascade(value={CascadeType.SAVE_UPDATE})         //设定级联关系
-    @JoinColumn(name="project_id")                       //指定与本类主键所对应的外表的外键
-    private Set<Task> tasks = new HashSet<Task>();
+    @OneToMany(cascade = {CascadeType.ALL},mappedBy = "project")
+    private Set<Task> tasks;
 
     public int getId() {
         return id;

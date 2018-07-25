@@ -16,13 +16,13 @@ public class TaskServiceImp implements TaskService {
 
 
     @Override
-    public String addTask(Task task) {
-        return taskDao.addTask(task);
+    public boolean addTask(String proId, Task task) {
+        return taskDao.addTask(proId,task);
     }
 
     @Override
-    public List<Task> listTask() {
-        return taskDao.listTask();
+    public List<Task> listTask(Integer proId) {
+        return taskDao.listTask(proId);
     }
 
     @Override

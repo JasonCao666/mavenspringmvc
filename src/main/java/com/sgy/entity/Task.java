@@ -1,7 +1,7 @@
 package com.sgy.entity;
 
-
 import javax.persistence.*;
+
 import java.io.Serializable;
 
 
@@ -22,14 +22,13 @@ public class Task{
     @Column(name = "task_plan_time")
     private String task_plan_time;
 
-    @Column(name = "task_finish_time")
-    private String task_finish_time;
+    @Column(name = "task_efficient_step")
+    private String task_efficient_step;
 
-    @Column(name = "task_status")
-    private String status;
+    @Column(name = "task_end_step")
+    private String task_end_step;
 
-    @ManyToOne
-    @JoinColumn(name="project_id")
+    @ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE })
     private Project project ;
 
     public int getId() {
@@ -72,19 +71,19 @@ public class Task{
         this.task_plan_time = task_plan_time;
     }
 
-    public String getTask_finish_time() {
-        return task_finish_time;
+    public String getTask_efficient_step() {
+        return task_efficient_step;
     }
 
-    public void setTask_finish_time(String task_finish_time) {
-        this.task_finish_time = task_finish_time;
+    public void setTask_efficient_step(String task_efficient_step) {
+        this.task_efficient_step = task_efficient_step;
     }
 
-    public String getStatus() {
-        return status;
+    public String getTask_end_step() {
+        return task_end_step;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setTask_end_step(String task_end_step) {
+        this.task_end_step = task_end_step;
     }
 }

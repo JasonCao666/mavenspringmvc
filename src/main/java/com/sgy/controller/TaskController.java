@@ -2,6 +2,7 @@ package com.sgy.controller;
 import com.sgy.entity.Task;
 import com.sgy.service.serviceInterFace.TaskService;
 
+import com.sgy.util.SortList;
 import net.sf.json.JSONArray;
 
 import org.json.JSONObject;
@@ -34,8 +35,15 @@ public class TaskController {
         public String showTaskPage(HttpServletRequest request,HttpServletResponse response,Model model) throws IOException {
 
             String proId = request.getParameter("proId");
-
+            Task task=new Task();
+            List<Task> list_task = taskService.listTask(Integer.parseInt(proId));
             model.addAttribute("proId", proId);
+            model.addAttribute("list_task",list_task);
+            SortList<Task> sortList = new SortList<Task>();
+            sortList.Sort(list_task, "getId", "asc");
+            for(int i=0;i<list_task.size();i++){
+                System.out.println(list_task.get(i).getName());
+            }
             System.out.println("proId"+proId);
             return "task_list";
 
@@ -49,32 +57,68 @@ public class TaskController {
 
     }
 
+    @RequestMapping("/showEditTaskPage")
+    public String showEditTaskPage(HttpServletRequest request, HttpServletResponse response,Model model) throws IOException {
+        String proId=request.getParameter("proId");
+        String taskId = request.getParameter("taskId");
+        String taskName = request.getParameter("taskName");
+        String taskDescription = request.getParameter("taskDescription");
+        String taskPlanTime = request.getParameter("taskPlanTime");
+        String taskEfficientStep = request.getParameter("taskEfficientStep");
+        String taskEndStep = request.getParameter("taskEndStep");
 
-    @RequestMapping(value = "addTask", method = RequestMethod.POST)
-    @ResponseBody
+        List<String> taskEfficientSteps = java.util.Arrays.asList(taskEfficientStep.split(","));
+
+        model.addAttribute("proId", proId);
+        model.addAttribute("taskId", taskId);
+        model.addAttribute("taskName", taskName);
+        model.addAttribute("taskDescription", taskDescription);
+        model.addAttribute("taskPlanTime", taskPlanTime);
+        model.addAttribute("taskEfficientSteps", taskEfficientSteps);
+        model.addAttribute("taskEndStep", taskEndStep);
+        return "edit_task_page";
+
+    }
+
+
+    @RequestMapping(value = "/addTask", method = RequestMethod.POST)
     public void saveTask(HttpServletRequest request, HttpServletResponse response) throws Exception{
         Task task=new Task();
-
 
         response.setCharacterEncoding("UTF-8");
 
         String taskName = request.getParameter("taskName");
         String taskDescription = request.getParameter("taskDescription");
+        String taskPlanTime = request.getParameter("taskPlanTime");
+        String taskEfficientSteps = request.getParameter("taskEfficientSteps");
+        String taskEndStep = request.getParameter("taskEndStep");
+        String taskProId = request.getParameter("taskPro");
+
         task.setName(taskName);
         task.setDescription(taskDescription);
+        task.setTask_plan_time(taskPlanTime);
+        task.setTask_efficient_step(taskEfficientSteps);
+        task.setTask_end_step(taskEndStep);
 
         System.out.println(taskName+" : "+taskDescription);
-
-        String jsonStr = taskService.addTask(task);
+        String result = "{\"result\":\"error\"}";
+        if(taskService.addTask(taskProId, task)){
+            result = "{\"result\":\"success\"}";
+        }
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+        out.write(result);
+        out.close();
+        /*String jsonStr =
         JSONObject jsonObj = new JSONObject(jsonStr);
         PrintWriter out = response.getWriter();
         out.print(jsonObj);
-        out.close();
+        out.close();*/
 
     }
 
 
-    @RequestMapping("listTask")
+    /*@RequestMapping("listTask")
     public void listTask(HttpServletRequest request, HttpServletResponse response) throws Exception{
         System.out.println("controller");
         Task task=new Task();
@@ -85,8 +129,7 @@ public class TaskController {
         PrintWriter out = response.getWriter();
         out.print(jsonArray);
         out.close();
-
-    }
+    }*/
 
     @RequestMapping(value = "editTask", method = RequestMethod.POST)
     @ResponseBody
@@ -95,14 +138,21 @@ public class TaskController {
         Task task=new Task();
 
         response.setCharacterEncoding("UTF-8");
+
         String taskId=request.getParameter("taskId");
         String taskName = request.getParameter("taskName");
         String taskDescription = request.getParameter("taskDescription");
+        String taskPlanTime = request.getParameter("taskPlanTime");
+        String taskEfficientSteps = request.getParameter("taskEfficientSteps");
+        String taskEndStep = request.getParameter("taskEndStep");
 
         task.setName(taskName);
         task.setDescription(taskDescription);
+        task.setTask_plan_time(taskPlanTime);
+        task.setTask_efficient_step(taskEfficientSteps);
+        task.setTask_end_step(taskEndStep);
 
-        System.out.println("Id: "+taskId+"Name: "+taskName+"Des: "+taskDescription);
+        System.out.println("taskEfficientSteps: "+taskEfficientSteps);
 
         if(taskService.editTask(taskId,task))
         {

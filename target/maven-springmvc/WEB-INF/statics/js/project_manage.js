@@ -161,7 +161,6 @@ function delProRequest(e){
 }
 
 function showTaskPage(id){
-    alert(1);
     window.location.href = "task/showTaskPage?proId="+id;
     /*$('#mainContents').empty();
     $.ajax({

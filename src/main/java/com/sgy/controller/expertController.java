@@ -95,7 +95,6 @@ public class expertController {
         PrintWriter out = response.getWriter();
         out.write(result);
         out.close();
-
     }
 
 

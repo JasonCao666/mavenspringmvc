@@ -48,24 +48,38 @@ public class ExpertDaoImp implements ExpertDao{
     public boolean editProject(String id, Project project) {
 
         Session session = sessionFactory.getCurrentSession();
+        Project project_current = (Project)session.get(Project.class, Integer.parseInt(id));
+        project_current.setName(project.getName());
+        project_current.setDescription(project.getDescription());
+        project_current.setWebsiteURL(project.getWebsiteURL());
 
-        String hql = "update Project p set p.name=?, p.description =?, p.websiteURL=? where p.id =?";
+        try{
+            session.update(project_current);
+            session.flush();
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+        /*String hql = "update Project p set p.name=?, p.description =?, p.websiteURL=? where p.id =?";
         Query query = session.createQuery(hql);
         query.setString(0, project.getName());
         query.setString(1, project.getDescription());
         query.setString(2, project.getWebsiteURL());
         query.setInteger(3, Integer.parseInt(id));
 
-        return (query.executeUpdate()>0);
+        return (query.executeUpdate()>0);*/
     }
 
     @Override
     public boolean deleteProject(String id) {
         Session session = sessionFactory.getCurrentSession();
-        String hql = "delete Project p where p.id = ?";
-        Query query = session.createQuery(hql);
-
-        query.setString(0, id);
-        return (query.executeUpdate() > 0);
+        Project project = (Project)session.get(Project.class, Integer.parseInt(id));
+        try{
+            session.delete(project);
+            session.flush();
+            return true;
+        }catch(Exception e){
+            return false;
+        }
     }
 }

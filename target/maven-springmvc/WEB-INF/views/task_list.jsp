@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -89,9 +90,42 @@
     </style>
 </head>
 <body class="task_list_body">
-<div>${proId}</div>
+<ul>
+    <a class="new-button" href="task/showAddTaskPage?proId=${proId}" rel="route" title="New">
+        <div class="horizontal-line"></div>
+        <div class="vertilcal-line"></div>
+    </a>
+<c:forEach items="${list_task}" varStatus="i" var="task" >
+    <li class="task_li">
+        <div class="task_content">
+            <div class="taskTag">
+                <div class="text" >
+                    <p style="color:white;">${i.index}</p>
+                    <p style="color:white;">Task</p>
+                </div>
+                <div class="region gesture "></div>
+            </div>
+            <div class="task_detail">
+                <div class="task_name">${task.name}</div>
+                <div class="task_description">${task.description}</div>
+            </div>
+            <div class="task_opts">
+                <button type="button" class="btn btn-default" aria-label="Left Align" onclick="editTask(this)"
+                        data-toggle="modal" data-target="#projectEditModal"
+                        name="taskId=${task.id}&taskName=${task.name}&taskDescription=${task.description}&taskPlanTime=${task.task_plan_time}&taskEfficientStep=${task.task_efficient_step}&taskEndStep=${task.task_end_step}">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                </button>
 
-
+                <button type="button" class="btn btn-default" aria-label="Left Align" onclick="delTask(this)"
+                        name="${task.id}">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </li>
+</c:forEach>
+</ul>
+<!--
 <ul>
     <a class="new-button" href="task/showAddTaskPage?proId=${proId}" rel="route" title="New">
         <div class="horizontal-line"></div>
@@ -155,27 +189,36 @@
     </div>
     </li>
 </ul>
+-->
 </body>
 <script>
-    /*window.onbeforeunload = onbeforeunload_handler();
 
-    function onbeforeunload_handler(){
-        $('#mainContents').empty();
-        $.ajax({
+    function editTask(e)
+    {
+        var args=e.name;
+        window.location.href = "task/showEditTaskPage?proId=${proId}&"+args;
+    }
 
-            type: "GET",
-            url: "task/showTaskPage",
-            data: {
-                "proId": '1',
-            },
-            success: function(data) {
 
-                $('#mainContents').append(data);
-                return false;
-            }
-        });
+   function delTask(e){
+       var task_Id=e.name;
+       $.ajax({
+           url: "task/delTask",
+           type: "POST",
+           dataType: "json",
+           data: {
+               "taskId":task_Id,
+           },
+           success:function(data){
+               alert("del task success");
+               window.location.href = "task/showTaskPage?proId="+"${proId}";
 
-    }*/
+           },
+           error:function(){
+               alert("error");
+           }
+       });
+   }
 
 </script>
 </html>
