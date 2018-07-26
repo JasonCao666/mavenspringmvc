@@ -4,6 +4,8 @@ package com.sgy.controller;
 import com.sgy.entity.Project;
 import com.sgy.service.serviceInterFace.ExpertService;
 import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.PropertyFilter;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,13 +65,26 @@ public class expertController {
 
     }
 
-    @RequestMapping(value ="/listProject", method = RequestMethod.POST)
+    @RequestMapping(value ="/listProject")
     public void listTask(HttpServletRequest request, HttpServletResponse response) throws Exception{
         System.out.println("controller");
         Project pro=new Project();
         List<Project> list_project = expertService.listProject();
         System.out.println(list_project);
-        String jsonArray= JSONArray.fromObject(list_project).toString();
+        JsonConfig cfg = new JsonConfig();
+        //这里是把关联对象剔除掉
+        cfg.setJsonPropertyFilter(new PropertyFilter()
+        {
+            public boolean apply(Object source, String name, Object value) {
+                System.out.println(name);
+                if(name.equals("project")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+        String jsonArray= JSONArray.fromObject(list_project,cfg).toString();
         System.out.println(jsonArray);
         PrintWriter out = response.getWriter();
         out.print(jsonArray);
