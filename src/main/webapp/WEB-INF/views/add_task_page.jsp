@@ -12,36 +12,84 @@
     <script src="/js/bootstrap.min.js"></script>
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/app_icons.css" rel="stylesheet">
+    <style>
+        .input-content{
+            width:100%;
+            display:inline-block;
+        }
+
+        .input-explain{
+            width:40%;
+            float:left;
+            margin-left: 10px;
+            margin-right: 10px;
+            word-wrap:break-word;
+            word-break:break-all;
+        }
+        .input-detail{
+            width:50%;
+            float:left;
+
+        }
+
+    </style>
 </head>
 <body>
 <div class="header-nav"></div>
-<div>${proId}</div>
+<!--<div>${proId}</div>-->
 <div class="container">
+    <div class="row" style="text-align: center;">
+        <h3>Add Task</h3>
+    </div>
 <form role="form">
     <div class="form-group">
+
         <label class="form-label">Task name</label>
-        <input type="text" class="form-control" id="taskName">
+        <div class="input-content">
+            <input type="text" class="input-detail" id="taskName">
+            <div class="input-explain">Give this task a brief name so you can quickly distinguish between tasks later</div>
+        </div>
+
     </div>
+
     <div class="form-group">
         <label class="form-label">Task description</label>
-        <textarea class="form-control" rows="3" name=textarea id="taskDescription"></textarea>
+        <div class="input-content">
+            <textarea class="input-detail" rows="3" name=textarea id="taskDescription"></textarea>
+            <div class="input-explain">Specific instructions for the participant to read, telling that what goal they are trying to achieve</div>
+         </div>
     </div>
+
     <div class="form-group">
+
         <label class="form-label">Anticipate completed time (secs)</label>
-        <textarea class="form-control" rows="3" name=textarea id="taskTime"></textarea>
+        <div class="input-content">
+            <textarea class="input-detail" rows="3" name=textarea id="taskTime"></textarea>
+            <div class="input-explain">How much time you think this task should take</div>
+        </div>
     </div>
     <div class="form-group">
+
         <label class="form-label">Efficient setup steps</label>
+
+        <div>The ordered steps that you think the participants could complete the task efficiently. (please separate the steps by" , ", e.g. My Account,My Library,book,check)</div>
         <div id="taskSteps">
+
             <input type="text" class="form-control" id="efficientStep1">
+
             <input type="button" class="btn btn-default" value="Remove" name="efficientStep1" onclick="delSelect(this,this.name);">
         </div>
 
         <button type="button" class="btn btn-default" id="addEfficient" onclick="addSteps(this.previousSibling);">Add new step</button>
+
+
     </div>
     <div class="form-group">
         <label class="form-label">Successful end step</label>
-        <input type="text" class="form-control" id="endStep">
+        <div class="input-content">
+            <input type="text" class="input-detail" id="endStep">
+            <div class="input-explain">The last step you want participants to click to successfully complete the task. (e.g. check)</div>
+        </div>
     </div>
 </form>
 
@@ -73,8 +121,6 @@ function addSteps(afterElement) {
     button.setAttribute("name","efficientStep"+number+"");
     button.setAttribute("onclick","delSelect(this,this.name);");
     button.value="Remove";
-
-
 
     div.appendChild(input);
     div.appendChild(button);

@@ -13,6 +13,27 @@
     <script src="/js/bootstrap.min.js"></script>
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/app_icons.css" rel="stylesheet">
+    <style>
+        .input-content{
+            width:100%;
+            display:inline-block;
+        }
+
+        .input-explain{
+            width:40%;
+            float:left;
+            margin-left: 10px;
+            margin-right: 10px;
+            word-wrap:break-word;
+            word-break:break-all;
+        }
+        .input-detail{
+            width:50%;
+            float:left;
+
+        }
+
+    </style>
 </head>
 <body>
 <div class="header-nav"></div>
@@ -21,21 +42,33 @@
     <form role="form">
         <div class="form-group">
             <label class="form-label">Task name</label>
-            <input type="text" class="form-control" id="taskName" value="${taskName}">
+            <div class="input-content">
+                <input type="text" class="input-detail" id="taskName" value="${taskName}">
+                <div class="input-explain">Give this task a brief name so you can quickly distinguish between tasks later</div>
+            </div>
         </div>
         <div class="form-group">
             <label class="form-label">Task description</label>
-            <textarea class="form-control" rows="3" name=textarea id="taskDescription" >${taskDescription}</textarea>
+            <div class="input-content">
+                <textarea class="input-detail" rows="3" name=textarea id="taskDescription" >${taskDescription}</textarea>
+                <div class="input-explain">Specific instructions for the participant to read, telling that what goal they are trying to achieve</div>
+            </div>
         </div>
         <div class="form-group">
             <label class="form-label">Anticipate completed time (secs)</label>
-            <textarea class="form-control" rows="3" name=textarea id="taskTime" >${taskPlanTime}</textarea>
+            <div class="input-content">
+                <textarea class="input-detail" rows="3" name=textarea id="taskTime" >${taskPlanTime}</textarea>
+                <div class="input-explain">How much time you think this task should take</div>
+            </div>
         </div>
         <div class="form-group">
             <label class="form-label">Efficient setup steps</label>
+            <div>The ordered steps that you think the participants could complete the task efficiently. (please separate the steps by" , ", e.g. My Account,My Library,book,check)</div>
             <div id="taskSteps">
                 <c:forEach items="${taskEfficientSteps}" varStatus="i" var="step" >
+
                 <input type="text" class="form-control" id="efficientStep${i.index}" value="${step}">
+
                 <input type="button" class="btn btn-default" value="Remove" name="efficientStep${i.index}" onclick="delSelect(this,this.name);">
                 </c:forEach>
             </div>
@@ -44,7 +77,10 @@
         </div>
         <div class="form-group">
             <label class="form-label">Successful end step</label>
-            <input type="text" class="form-control" id="endStep" value="${taskEndStep}">
+            <div class="input-content">
+            <input type="text" class="input-detail" id="endStep" value="${taskEndStep}">
+                <div class="input-explain">The last step you want participants to click to successfully complete the task. (e.g. check)</div>
+            </div>
         </div>
     </form>
 
