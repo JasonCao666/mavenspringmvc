@@ -74,9 +74,7 @@
 
         <div>The ordered steps that you think the participants could complete the task efficiently. (please separate the steps by" , ", e.g. My Account,My Library,book,check)</div>
         <div id="taskSteps">
-
             <input type="text" class="form-control" id="efficientStep1">
-
             <input type="button" class="btn btn-default" value="Remove" name="efficientStep1" onclick="delSelect(this,this.name);">
         </div>
 
