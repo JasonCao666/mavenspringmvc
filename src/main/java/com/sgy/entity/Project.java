@@ -27,6 +27,9 @@ public class Project {
     @OneToMany(cascade = {CascadeType.ALL},mappedBy = "project")
     private Set<Task> tasks;
 
+    @OneToMany(cascade = {CascadeType.ALL},mappedBy = "project")
+    private Set<Report> reports;
+
     public int getId() {
         return id;
     }
@@ -65,5 +68,13 @@ public class Project {
 
     public void setWebsiteURL(String websiteURL) {
         this.websiteURL = websiteURL;
+    }
+
+    public Set<Report> getReports() {
+        return reports;
+    }
+
+    public void setReports(Set<Report> reports) {
+        this.reports = reports;
     }
 }

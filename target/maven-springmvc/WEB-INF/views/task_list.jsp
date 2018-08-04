@@ -91,8 +91,11 @@
 </head>
 <body class="task_list_body">
 <div class="header-nav"></div>
+<div class="row" style="text-align: center;">
+    <h3>${proName} Task List</h3>
+</div>
 <ul>
-    <a class="new-button" href="task/showAddTaskPage?proId=${proId}" rel="route" title="New">
+    <a class="new-button" href="task/showAddTaskPage?proId=${proId}&proName=${proName}" rel="route" title="New">
         <div class="horizontal-line"></div>
         <div class="vertilcal-line"></div>
     </a>
@@ -101,7 +104,7 @@
         <div class="task_content">
             <div class="taskTag">
                 <div class="text" >
-                    <p style="color:white;">${i.index}</p>
+                    <p style="color:white;">${i.index+1}</p>
                     <p style="color:white;">Task</p>
                 </div>
                 <div class="region gesture "></div>
@@ -199,7 +202,7 @@
     function editTask(e)
     {
         var args=e.name;
-        window.location.href = "task/showEditTaskPage?proId=${proId}&"+args;
+        window.location.href = "task/showEditTaskPage?proId=${proId}&"+args+"&proName=${proName}";
     }
 
 
@@ -214,7 +217,7 @@
            },
            success:function(data){
                alert("del task success");
-               window.location.href = "task/showTaskPage?proId="+"${proId}";
+               window.location.href = "task/showTaskPage?proId="+"${proId}"+"&proName=${proName}";
 
            },
            error:function(){

@@ -56,27 +56,27 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="proModalLabel">Add project</h4>
+                        <h4 class="modal-title" id="proModalLabel">Add Evaluation</h4>
                     </div>
                     <div class="modal-body">
                         <form role="form">
                             <div class="form-group">
-                                <label class="form-label">Project name</label>
+                                <label class="form-label">* Evaluation name</label>
                                 <input type="text" class="form-control" id="proName">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Project description</label>
+                                <label class="form-label">Evaluation description</label>
                                 <textarea class="form-control" rows="3" name=textarea id="proDescription"></textarea>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Website URL</label>
+                                <label class="form-label">* Website URL</label>
                                 <textarea class="form-control" rows="3" name=textarea id="proWebsite"></textarea>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="addProButton" data-dismiss="modal">Save Project</button>
+                        <button type="button" class="btn btn-primary" id="addProButton" data-dismiss="modal">Save Evaluation</button>
                     </div>
                 </div>
             </div>
@@ -89,28 +89,28 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="proEditModalLabel">Edit project</h4>
+                        <h4 class="modal-title" id="proEditModalLabel">Edit evaluation</h4>
                     </div>
                     <div class="modal-body">
                         <form role="form">
                             <input type="text" class="form-control" id="proEditId" style="display:none;">
                             <div class="form-group">
-                                <label class="form-label">Project name</label>
+                                <label class="form-label">* Evaluation name</label>
                                 <input type="text" class="form-control" id="proEditName">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Project description</label>
+                                <label class="form-label">Evaluation description</label>
                                 <textarea class="form-control" rows="3" name=textarea id="proEditDescription"></textarea>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">website URL</label>
+                                <label class="form-label">* Website URL</label>
                                 <textarea class="form-control" rows="3" name=textarea id="proEditWebsite"></textarea>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="proEditButton" data-dismiss="modal">Update Project</button>
+                        <button type="button" class="btn btn-primary" id="proEditButton" data-dismiss="modal">Update Evaluation</button>
                     </div>
                 </div>
             </div>
@@ -124,7 +124,7 @@
                 {
                     Project project=projects.get(i);
             %>
-            <li class="page-list-item grid-style-item"><a href="javascript:showTaskPage(<%=project.getId()%>)" name="<%=project.getId()%>"  rel="route">
+            <li class="page-list-item grid-style-item"><a href="javascript:showTaskPage('<%=project.getId()%>','<%=project.getName()%>')" name="<%=project.getId()%>"  rel="route">
                 <div class="hover"></div>
                 <div class="content">
                     <div class="header">

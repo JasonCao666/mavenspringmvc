@@ -37,8 +37,11 @@
 </head>
 <body>
 <div class="header-nav"></div>
-<div>${taskId}</div>
+<!--<div>${taskId}</div>-->
 <div class="container">
+    <div class="row" style="text-align: center;">
+        <h3>Edit Task</h3>
+    </div>
     <form role="form">
         <div class="form-group">
             <label class="form-label">Task name</label>
@@ -55,7 +58,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="form-label">Anticipate completed time (secs)</label>
+            <label class="form-label">Anticipated maximum complete time (secs)</label>
             <div class="input-content">
                 <textarea class="input-detail" rows="3" name=textarea id="taskTime" >${taskPlanTime}</textarea>
                 <div class="input-explain">How much time you think this task should take</div>
@@ -63,7 +66,7 @@
         </div>
         <div class="form-group">
             <label class="form-label">Efficient setup steps</label>
-            <div>The ordered steps that you think the participants could complete the task efficiently. (please separate the steps by" , ", e.g. My Account,My Library,book,check)</div>
+            <div>The ordered steps that you think the participants could complete the task efficiently. Please enter single efficient step in each input box (e.g. Help, My Library)</div>
             <div id="taskSteps">
                 <c:forEach items="${taskEfficientSteps}" varStatus="i" var="step" >
 
@@ -192,7 +195,7 @@
             },
             success:function(data){
                 alert("edit task success");
-                window.location.href = "task/showTaskPage?proId="+"${proId}";
+                window.location.href = "task/showTaskPage?proId="+"${proId}"+"&proName=${proName}";
 
             },
             error:function(){
@@ -201,7 +204,7 @@
         });
     }
     function editReturn(){
-        window.location.href = "task/showTaskPage?proId="+"${proId}";
+        window.location.href = "task/showTaskPage?proId="+"${proId}"+"&proName=${proName}";
     }
 </script>
 </body>

@@ -35,9 +35,11 @@ public class TaskController {
         public String showTaskPage(HttpServletRequest request,HttpServletResponse response,Model model) throws IOException {
 
             String proId = request.getParameter("proId");
+            String proName = request.getParameter("proName");
             Task task=new Task();
             List<Task> list_task = taskService.listTask(Integer.parseInt(proId));
             model.addAttribute("proId", proId);
+            model.addAttribute("proName", proName);
             model.addAttribute("list_task",list_task);
             SortList<Task> sortList = new SortList<Task>();
             sortList.Sort(list_task, "getId", "asc");
@@ -52,7 +54,9 @@ public class TaskController {
     @RequestMapping("/showAddTaskPage")
     public String showAddTaskPage(HttpServletRequest request, HttpServletResponse response,Model model) throws IOException {
         String proId = request.getParameter("proId");
+        String proName = request.getParameter("proName");
         model.addAttribute("proId", proId);
+        model.addAttribute("proName", proName);
         return "add_task_page";
 
     }
@@ -60,6 +64,7 @@ public class TaskController {
     @RequestMapping("/showEditTaskPage")
     public String showEditTaskPage(HttpServletRequest request, HttpServletResponse response,Model model) throws IOException {
         String proId=request.getParameter("proId");
+        String proName=request.getParameter("proName");
         String taskId = request.getParameter("taskId");
         String taskName = request.getParameter("taskName");
         String taskDescription = request.getParameter("taskDescription");
@@ -70,6 +75,7 @@ public class TaskController {
         List<String> taskEfficientSteps = java.util.Arrays.asList(taskEfficientStep.split(","));
 
         model.addAttribute("proId", proId);
+        model.addAttribute("proName", proName);
         model.addAttribute("taskId", taskId);
         model.addAttribute("taskName", taskName);
         model.addAttribute("taskDescription", taskDescription);

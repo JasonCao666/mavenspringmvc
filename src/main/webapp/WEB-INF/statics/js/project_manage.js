@@ -160,8 +160,8 @@ function delProRequest(e){
 
 }
 
-function showTaskPage(id){
-    window.location.href = "task/showTaskPage?proId="+id;
+function showTaskPage(id,name){
+    window.location.href = "task/showTaskPage?proId="+id+"&proName="+name;
     /*$('#mainContents').empty();
     $.ajax({
         type: "GET",
