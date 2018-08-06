@@ -3,6 +3,7 @@ package com.sgy.entity;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Report")
@@ -23,6 +24,9 @@ public class Report {
     @ManyToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE })
     @JoinColumn(name = "project_id")
     private Project project ;
+
+    @Transient
+    private List<String> steps;
 
     public int getId() {
         return id;
@@ -62,5 +66,13 @@ public class Report {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public List<String> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(List<String> steps) {
+        this.steps = steps;
     }
 }

@@ -55,6 +55,7 @@ public class TaskController {
     public String showAddTaskPage(HttpServletRequest request, HttpServletResponse response,Model model) throws IOException {
         String proId = request.getParameter("proId");
         String proName = request.getParameter("proName");
+
         model.addAttribute("proId", proId);
         model.addAttribute("proName", proName);
         return "add_task_page";

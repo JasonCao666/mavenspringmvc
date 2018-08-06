@@ -144,6 +144,10 @@
                         name="<%=project.getId()%>">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                 </button>
+                <button type="button" class="btn btn-default" aria-label="Left Align" onclick="showReport(this)"
+                        name="<%=project.getId()%>,<%=project.getName()%>">
+                    <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+                </button>
             </li>
             <%
                 }

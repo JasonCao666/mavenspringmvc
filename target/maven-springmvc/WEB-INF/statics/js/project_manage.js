@@ -176,3 +176,8 @@ function showTaskPage(id,name){
     });*/
 }
 
+function showReport(e){
+    var id=e.name.split(",")[0];
+    var name=e.name.split(",")[1];
+    window.location.href = "report/showReportPage?proId="+id+"&proName="+name;
+}
