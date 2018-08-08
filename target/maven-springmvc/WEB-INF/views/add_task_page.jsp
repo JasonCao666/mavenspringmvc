@@ -41,6 +41,7 @@
     <div class="row" style="text-align: center;">
         <h3>Add Task</h3>
     </div>
+
 <form role="form">
     <div class="form-group">
 
@@ -68,11 +69,11 @@
             <div class="input-explain">How much time you think this task should take</div>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="width: 50%;">
 
         <label class="form-label">Efficient setup steps</label>
 
-        <div>The ordered steps that you think the participants could complete the task efficiently. Please enter single efficient step in each input box (e.g. Help, My Library))</div>
+        <div>The ordered steps that you think the participants could complete the task efficiently. Please enter single efficient step in each input box (e.g. input box1: Help input box2: My Library)</div>
         <div id="taskSteps">
             <input type="text" class="form-control" id="efficientStep1">
             <input type="button" class="btn btn-default" value="Remove" name="efficientStep1" onclick="delSelect(this,this.name);">
@@ -89,6 +90,7 @@
             <div class="input-explain">The last step you want participants to click to successfully complete the task. (e.g. check)</div>
         </div>
     </div>
+
 </form>
 
 <button type="button" class="btn btn-default" data-dismiss="modal" onclick="addReturn()">Return</button>
@@ -194,7 +196,7 @@ function addTask(){
             "taskPro": task_pro,
         },
         success:function(data){
-            alert("add task success");
+            //alert("add task success");
             window.location.href = "task/showTaskPage?proId=${proId}&proName=${proName}";
 
         },

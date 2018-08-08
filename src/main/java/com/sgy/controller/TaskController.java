@@ -38,11 +38,12 @@ public class TaskController {
             String proName = request.getParameter("proName");
             Task task=new Task();
             List<Task> list_task = taskService.listTask(Integer.parseInt(proId));
+            SortList<Task> sortList = new SortList<Task>();
+            sortList.Sort(list_task, "getId", "asc");
             model.addAttribute("proId", proId);
             model.addAttribute("proName", proName);
             model.addAttribute("list_task",list_task);
-            SortList<Task> sortList = new SortList<Task>();
-            sortList.Sort(list_task, "getId", "asc");
+
             for(int i=0;i<list_task.size();i++){
                 System.out.println(list_task.get(i).getName());
             }

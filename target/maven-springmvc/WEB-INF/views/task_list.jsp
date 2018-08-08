@@ -94,6 +94,21 @@
 <div class="row" style="text-align: center;">
     <h3>${proName} Task List</h3>
 </div>
+<div class="row">
+    <div class="modal fade" id="delConfirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="proDelModalLabel">Are you sure to delete this task</h4>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" style="background:#5cb85c;color: white;" id="confirmButton" data-dismiss="modal" onclick="delTask()">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <ul>
     <a class="new-button" href="task/showAddTaskPage?proId=${proId}&proName=${proName}" rel="route" title="New">
         <div class="horizontal-line"></div>
@@ -115,13 +130,13 @@
             </div>
             <div class="task_opts">
                 <button type="button" class="btn btn-default" aria-label="Left Align" onclick="editTask(this)"
-                        data-toggle="modal" data-target="#projectEditModal"
+                        data-toggle="modal" data-target="#projectEditModal" data-placement="bottom" title="Edit"
                         name="taskId=${task.id}&taskName=${task.name}&taskDescription=${task.description}&taskPlanTime=${task.task_plan_time}&taskEfficientStep=${task.task_efficient_step}&taskEndStep=${task.task_end_step}">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 </button>
 
-                <button type="button" class="btn btn-default" aria-label="Left Align" onclick="delTask(this)"
-                        name="${task.id}">
+                <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-target="#delConfirmModal" onclick="delTaskRequest(this)"
+                        name="${task.id}" data-placement="bottom" title="Delete">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                 </button>
             </div>
@@ -205,18 +220,21 @@
         window.location.href = "task/showEditTaskPage?proId=${proId}&"+args+"&proName=${proName}";
     }
 
+var del_task_id;
+   function delTaskRequest(e){
+       del_task_id=e.name;
 
-   function delTask(e){
-       var task_Id=e.name;
+   }
+   function delTask(){
        $.ajax({
            url: "task/delTask",
            type: "POST",
            dataType: "json",
            data: {
-               "taskId":task_Id,
+               "taskId":del_task_id,
            },
            success:function(data){
-               alert("del task success");
+               //alert("del task success");
                window.location.href = "task/showTaskPage?proId="+"${proId}"+"&proName=${proName}";
 
            },

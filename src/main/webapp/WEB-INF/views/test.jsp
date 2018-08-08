@@ -116,7 +116,21 @@
             </div>
         </div>
     </div>
-
+    <div class="row">
+    <div class="modal fade" id="delConfirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="proDelModalLabel">Are you sure to delete this project</h4>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" style="background:#5cb85c;color: white;" id="confirmButton" data-dismiss="modal" onclick="delPro()">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
     <div class="page-list clearfix">
         <ul class="grid">
             <%
@@ -124,7 +138,7 @@
                 {
                     Project project=projects.get(i);
             %>
-            <li class="page-list-item grid-style-item"><a href="javascript:showTaskPage('<%=project.getId()%>','<%=project.getName()%>')" name="<%=project.getId()%>"  rel="route">
+            <li class="page-list-item grid-style-item" style="width: 173px;height: 170px;"><a href="javascript:showTaskPage('<%=project.getId()%>','<%=project.getName()%>')" name="<%=project.getId()%>"  rel="route">
                 <div class="hover"></div>
                 <div class="content">
                     <div class="header">
@@ -135,18 +149,22 @@
                 </div>
                 </a>
                 <button type="button" class="btn btn-default" aria-label="Left Align" onclick="edit(this)"
-                        data-toggle="modal" data-target="#projectEditModal"
+                        data-toggle="modal" data-target="#projectEditModal"  data-placement="bottom" title="Edit"
                         name="<%=project.getId()+","+project.getName()+","+project.getDescription()+","+project.getWebsiteURL()%>">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 </button>
 
-                <button type="button" class="btn btn-default" aria-label="Left Align" onclick="delProRequest(this)"
-                        name="<%=project.getId()%>">
+                <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-target="#delConfirmModal" onclick="delProRequest(this)"
+                        name="<%=project.getId()%>" data-placement="bottom" title="Delete">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                 </button>
                 <button type="button" class="btn btn-default" aria-label="Left Align" onclick="showReport(this)"
-                        name="<%=project.getId()%>,<%=project.getName()%>">
+                        name="<%=project.getId()%>,<%=project.getName()%>" data-placement="bottom" title="Report">
                     <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default" aria-label="Left Align" onclick="showTaskPage('<%=project.getId()%>','<%=project.getName()%>')"
+                        name="<%=project.getId()%>,<%=project.getName()%>" data-placement="bottom" title="Tasks">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                 </button>
             </li>
             <%

@@ -73,7 +73,6 @@ function addProRequest() {
     var proDescription=document.getElementById("proDescription").value;
     var proWebsite=document.getElementById("proWebsite").value;
     proDescription= proDescription.replace(/\n|\r\n/g,"<br>");
-    alert(proName);
     //var reg=new RegExp("<br>","g"); var newstr=remContent.replace(reg,"\n");
     $.ajax({
         url: "project/addProject",
@@ -85,7 +84,7 @@ function addProRequest() {
             "proWebsite": proWebsite,
         },
         success:function(data){
-            alert("add task success");
+            //alert("add task success");
             location.reload();
 
         },
@@ -127,7 +126,7 @@ function editTaskRequest() {
         },
         success: function (data) {
             if ("success" == data.result) {
-                alert("edit success");
+                //alert("edit success");
                 location.reload();
             }
             else {
@@ -138,18 +137,22 @@ function editTaskRequest() {
     });
 }
 
+var del_id;
 function delProRequest(e){
-    var id=e.name;
+    del_id=e.name;
+
+}
+function delPro(){
     $.ajax({
         url: "project/delProject",
         type: "POST",
         dataType: "json",
         data: {
-            "proId": id,
+            "proId": del_id,
         },
         success: function (data) {
             if ("success" == data.result) {
-                alert("del success");
+                //alert("del success");
                 location.reload();
             }
             else {
@@ -157,9 +160,7 @@ function delProRequest(e){
             }
         }
     });
-
 }
-
 function showTaskPage(id,name){
     window.location.href = "task/showTaskPage?proId="+id+"&proName="+name;
     /*$('#mainContents').empty();

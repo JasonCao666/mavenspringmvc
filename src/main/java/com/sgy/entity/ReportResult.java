@@ -8,6 +8,12 @@ public class ReportResult {
 
     private int taskId;
 
+    private String taskName;
+
+    private String taskDescription;
+
+    private String taskSteps;
+
     private int successNumber;
 
     private int participateNumber;
@@ -19,6 +25,8 @@ public class ReportResult {
     private JSONArray incorrects;
 
     private int efficientNumber;
+
+
 
     public int getSuccessNumber() {
         return successNumber;
@@ -74,5 +82,29 @@ public class ReportResult {
 
     public void setIncorrects(JSONArray incorrects) {
         this.incorrects = incorrects;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
+    public void setTaskDescription(String taskDescription) {
+        this.taskDescription = taskDescription;
+    }
+
+    public String getTaskSteps() {
+        return taskSteps;
+    }
+
+    public void setTaskSteps(String taskSteps) {
+        this.taskSteps = taskSteps;
     }
 }

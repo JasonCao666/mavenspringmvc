@@ -64,9 +64,9 @@
                 <div class="input-explain">How much time you think this task should take</div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width: 50%;">
             <label class="form-label">Efficient setup steps</label>
-            <div>The ordered steps that you think the participants could complete the task efficiently. Please enter single efficient step in each input box (e.g. Help, My Library)</div>
+            <div>The ordered steps that you think the participants could complete the task efficiently. Please enter single efficient step in each input box (e.g. input box1: Help input box2: My Library)</div>
             <div id="taskSteps">
                 <c:forEach items="${taskEfficientSteps}" varStatus="i" var="step" >
 
@@ -194,7 +194,7 @@
                 "taskEndStep": task_endStep,
             },
             success:function(data){
-                alert("edit task success");
+                //alert("edit task success");
                 window.location.href = "task/showTaskPage?proId="+"${proId}"+"&proName=${proName}";
 
             },
